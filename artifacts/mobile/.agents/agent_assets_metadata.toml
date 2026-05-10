@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "rm3z1D9eegdN3RfJHdDON"
+uri = "file://artifacts/mobile/assets/images/icon.png"
+type = "image"
+title = "braw app icon"
+
+[[generated]]
+id = "2JbXVz2ZDjcZUx1cpw1_9"
+uri = "file://artifacts/mobile/assets/images/splash.png"
+type = "image"
+title = "braw splash background"

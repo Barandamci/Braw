@@ -1,0 +1,71 @@
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  useFonts,
+} from "@expo-google-fonts/inter";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import React, { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { AuthProvider } from "@/context/AuthContext";
+import { ChatProvider } from "@/context/ChatContext";
+
+SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient();
+
+export default function RootLayout() {
+  const [fontsLoaded, fontError] = useFonts({
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
+
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) return null;
+
+  return (
+    <SafeAreaProvider>
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <KeyboardProvider>
+              <AuthProvider>
+                <ChatProvider>
+                  <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="(auth)/login" />
+                    <Stack.Screen name="(auth)/register" />
+                    <Stack.Screen name="(tabs)" />
+                    <Stack.Screen name="chat/[id]" />
+                    <Stack.Screen name="group/[id]" />
+                    <Stack.Screen name="profile/[uid]" />
+                    <Stack.Screen name="admin/index" />
+                    <Stack.Screen name="admin/user/[uid]" />
+                    <Stack.Screen name="admin/messages/[convId]" />
+                    <Stack.Screen name="settings/index" />
+                    <Stack.Screen name="settings/edit-profile" />
+                    <Stack.Screen name="new-chat" />
+                    <Stack.Screen name="new-group" />
+                  </Stack>
+                </ChatProvider>
+              </AuthProvider>
+            </KeyboardProvider>
+          </GestureHandlerRootView>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </SafeAreaProvider>
+  );
+}
