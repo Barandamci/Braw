@@ -17,7 +17,8 @@ import { Feather } from "@expo/vector-icons";
 import { useAuth } from "@/context/AuthContext";
 import { useColors } from "@/hooks/useColors";
 
-const API_BASE = process.env["EXPO_PUBLIC_API_URL"] ?? "http://localhost:5000";
+const API_BASE = process.env["EXPO_PUBLIC_API_URL"] ?? "";
+const USE_API_OTP = API_BASE !== "" && !API_BASE.includes("localhost");
 
 async function sendOTP(email: string): Promise<void> {
   const res = await fetch(`${API_BASE}/api/otp/send`, {
@@ -104,9 +105,13 @@ export default function RegisterScreen() {
 
     setLoading(true);
     try {
-      await sendOTP(email.trim());
-      startCooldown();
-      setStep("otp");
+      if (USE_API_OTP) {
+        await sendOTP(email.trim());
+        startCooldown();
+        setStep("otp");
+      } else {
+        await signUp(email.trim(), password, username.trim(), displayName.trim());
+      }
     } catch (e: unknown) {
       Alert.alert("Hata", (e as Error).message);
     } finally {
