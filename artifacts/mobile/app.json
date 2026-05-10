@@ -11,12 +11,19 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#0a0a0f"
+      "backgroundColor": "#1a56db"
     },
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.braw.tr"
     },
-    "android": {},
+    "android": {
+      "package": "com.braw.tr",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#1a56db"
+      }
+    },
     "web": {
       "favicon": "./assets/images/icon.png"
     },
@@ -28,7 +35,8 @@
         }
       ],
       "expo-font",
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-image-picker"
     ],
     "experiments": {
       "typedRoutes": true,
