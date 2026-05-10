@@ -1,18 +1,22 @@
 workflows:
   android-workflow:
-    name: Android Build
+    name: Android APK
     max_build_duration: 60
     environment:
       node: 18.17.0
     scripts:
+      - name: Install pnpm
+        script: |
+          npm install -g pnpm@8
+          pnpm --version
       - name: Install dependencies
         script: |
-          cd artifacts/mobile
-          yarn install --ignore-engines
+          pnpm install --no-frozen-lockfile --shamefully-hoist
       - name: Build APK
         script: |
           cd artifacts/mobile
-          npx expo prebuild --platform android
-          cd android && ./gradlew assembleRelease
+          npx expo prebuild --platform android --no-install
+          cd android
+          ./gradlew assembleRelease
     artifacts:
       - artifacts/mobile/android/app/build/outputs/**/*.apk
