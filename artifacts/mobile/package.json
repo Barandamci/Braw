@@ -60,11 +60,10 @@
     "firebase": "^12.13.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": [
+    "approvedBuilds": [
       "@firebase/util",
       "esbuild",
-      "protobufjs",
-      "better-sqlite3"
+      "protobufjs"
     ]
   }
 }
