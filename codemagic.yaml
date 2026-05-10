@@ -3,7 +3,7 @@ workflows:
     name: Android APK
     max_build_duration: 60
     environment:
-      node: 18.17.0
+      node: 22.13.0
     scripts:
       - name: Setup pnpm
         script: |
