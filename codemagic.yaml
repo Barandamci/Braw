@@ -13,7 +13,7 @@ workflows:
       - name: Install dependencies
         script: |
           cd artifacts/mobile
-          pnpm install --frozen-lockfile
+          pnpm install --frozen-lockfile --approve-builds
       - name: Build APK
         script: |
           cd artifacts/mobile
