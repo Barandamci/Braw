@@ -10,8 +10,7 @@ workflows:
       - name: Install dependencies
         script: |
           export PATH="$HOME/.local/share/pnpm:$PATH"
-          pnpm approve-builds --yes || true
-          pnpm install --no-frozen-lockfile
+          pnpm install --no-frozen-lockfile --config.ignore-scripts=false
       - name: Build APK
         script: |
           export PATH="$HOME/.local/share/pnpm:$PATH"
