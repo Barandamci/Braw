@@ -10,11 +10,12 @@ workflows:
       - name: Install dependencies
         script: |
           export PATH="$HOME/.local/share/pnpm:$PATH"
-          pnpm install
+          pnpm install --no-frozen-lockfile
       - name: Build APK
         script: |
           export PATH="$HOME/.local/share/pnpm:$PATH"
+          cd artifacts/mobile
           npx expo prebuild --platform android
           cd android && ./gradlew assembleRelease
     artifacts:
-      - android/app/build/outputs/**/*.apk
+      - artifacts/mobile/android/app/build/outputs/**/*.apk
