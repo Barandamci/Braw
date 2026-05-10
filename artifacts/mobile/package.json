@@ -63,8 +63,8 @@
     "onlyBuiltDependencies": [
       "@firebase/util",
       "esbuild",
-      "protobufjs"
-    ],
-    "ignoredBuiltDependencies": []
+      "protobufjs",
+      "better-sqlite3"
+    ]
   }
 }
