@@ -4,17 +4,21 @@ import {
   initializeAuth,
   getReactNativePersistence,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, enableNetwork, disableNetwork } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 
+const appId =
+  process.env["EXPO_PUBLIC_FIREBASE_APP_ID"] ||
+  "1:531426380270:web:000000000000000000000000";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCylUIn89c7Xkev3tbBSncFGqNwPchb3bU",
+  apiKey: process.env["EXPO_PUBLIC_FIREBASE_API_KEY"] || "AIzaSyCylUIn89c7Xkev3tbBSncFGqNwPchb3bU",
   authDomain: "braw-te.firebaseapp.com",
   projectId: "braw-te",
   storageBucket: "braw-te.firebasestorage.app",
   messagingSenderId: "531426380270",
-  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID || "",
+  appId,
 };
 
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
@@ -32,6 +36,12 @@ if (Platform.OS === "web") {
   }
 }
 
-export { auth };
-export const db = getFirestore(app);
+const db = getFirestore(app);
+
+// Force Firestore online (workaround for offline errors on web)
+if (Platform.OS === "web") {
+  enableNetwork(db).catch(() => {});
+}
+
+export { auth, db };
 export default app;
