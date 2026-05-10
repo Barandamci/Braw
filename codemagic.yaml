@@ -13,13 +13,13 @@ workflows:
       - name: Install dependencies
         script: |
           cd artifacts/mobile
-          pnpm install --frozen-lockfile --ignore-scripts
+          pnpm install --frozen-lockfile
       - name: Build APK
         script: |
           cd artifacts/mobile
           npx expo prebuild --platform android --no-install
           cd android
           chmod +x gradlew
-          ./gradlew assembleRelease
+          ./gradlew assembleRelease --no-daemon
     artifacts:
       - artifacts/mobile/android/app/build/outputs/**/*.apk
