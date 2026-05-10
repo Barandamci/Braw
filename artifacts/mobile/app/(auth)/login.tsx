@@ -10,6 +10,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
+  Image,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -62,10 +63,11 @@ export default function LoginScreen() {
         >
           {/* Logo */}
           <View style={styles.logoArea}>
-            <View style={[styles.logoCircle, { backgroundColor: colors.primary }]}>
-              <Text style={styles.logoText}>B</Text>
-            </View>
-            <Text style={[styles.appName, { color: colors.foreground }]}>braw</Text>
+            <Image
+              source={require("../../assets/images/icon.png")}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
             <Text style={[styles.tagline, { color: colors.mutedForeground }]}>
               Seninle konuşmak için buradayız
             </Text>
@@ -140,18 +142,9 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   root: { flex: 1 },
   container: { paddingHorizontal: 28, flexGrow: 1, justifyContent: "center" },
-  logoArea: { alignItems: "center", marginBottom: 48 },
-  logoCircle: {
-    width: 72,
-    height: 72,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 14,
-  },
-  logoText: { fontSize: 36, fontWeight: "800", color: "#fff" },
-  appName: { fontSize: 32, fontWeight: "800", letterSpacing: -1 },
-  tagline: { marginTop: 6, fontSize: 14, textAlign: "center" },
+  logoArea: { alignItems: "center", marginBottom: 40 },
+  logoImage: { width: 120, height: 120, marginBottom: 10 },
+  tagline: { marginTop: 4, fontSize: 14, textAlign: "center" },
   form: { gap: 14 },
   inputWrapper: {
     flexDirection: "row",
