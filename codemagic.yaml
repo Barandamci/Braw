@@ -13,7 +13,6 @@ workflows:
       - name: Install dependencies
         script: |
           cd artifacts/mobile
-          echo "enable-pre-post-scripts=true" >> .npmrc
           pnpm install --frozen-lockfile --ignore-scripts
       - name: Build APK
         script: |
