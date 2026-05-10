@@ -58,5 +58,12 @@
   "dependencies": {
     "@react-native-google-signin/google-signin": "^16.1.2",
     "firebase": "^12.13.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@firebase/util",
+      "esbuild",
+      "protobufjs"
+    ]
   }
 }
