@@ -5,13 +5,14 @@ workflows:
     environment:
       node: 18.17.0
     scripts:
-      - name: Install pnpm
+      - name: Setup
         script: |
-          npm install -g pnpm@8
-          pnpm --version
+          node --version
+          npm --version
       - name: Install dependencies
         script: |
-          pnpm install --no-frozen-lockfile --shamefully-hoist
+          cd artifacts/mobile
+          npm install --legacy-peer-deps
       - name: Build APK
         script: |
           cd artifacts/mobile
