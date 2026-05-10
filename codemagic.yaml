@@ -6,11 +6,14 @@ workflows:
       node: 18.17.0
     scripts:
       - name: Install pnpm
-        script: npm install -g pnpm
+        script: curl -fsSL https://get.pnpm.io/install.sh | sh -
       - name: Install dependencies
-        script: pnpm install
+        script: |
+          export PATH="$HOME/.local/share/pnpm:$PATH"
+          pnpm install
       - name: Build APK
         script: |
+          export PATH="$HOME/.local/share/pnpm:$PATH"
           npx expo prebuild --platform android
           cd android && ./gradlew assembleRelease
     artifacts:
